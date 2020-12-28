@@ -1,17 +1,17 @@
-// dear imgui: Renderer for DirectX12
-// This needs to be used along with a Platform Binding (e.g. Win32)
+// dear imgui: Renderer Backend for DirectX12
+// This needs to be used along with a Platform Backend (e.g. Win32)
 
 // Implemented features:
 //  [X] Renderer: User texture binding. Use 'D3D12_GPU_DESCRIPTOR_HANDLE' as ImTextureID. Read the FAQ about ImTextureID!
 //  [X] Renderer: Support for large meshes (64k+ vertices) with 16-bit indices.
 
-// Important: to compile on 32-bit systems, this back-end requires code to be compiled with '#define ImTextureID ImU64'.
+// Important: to compile on 32-bit systems, this backend requires code to be compiled with '#define ImTextureID ImU64'.
 // This is because we need ImTextureID to carry a 64-bit value and by default ImTextureID is defined as void*.
-// This define is done in the example .vcxproj file and need to be replicated in your app (by e.g. editing imconfig.h)
+// This define is set in the example .vcxproj file and need to be replicated in your app or by adding it to your imconfig.h file.
 
-// You can copy and use unmodified imgui_impl_* files in your project. See main.cpp for an example of using this.
-// If you are new to dear imgui, read examples/README.txt and read the documentation at the top of imgui.cpp.
-// https://github.com/ocornut/imgui
+// You can copy and use unmodified imgui_impl_* files in your project. See examples/ folder for examples of using this.
+// If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
+// Read online: https://github.com/ocornut/imgui/tree/master/docs
 
 // CHANGELOG
 // (minor and older changes stripped away, please see git history for details)
@@ -128,7 +128,6 @@ static void ImGui_ImplDX12_SetupRenderState(ImDrawData* draw_data, ID3D12Graphic
 }
 
 // Render function
-// (this used to be set in io.RenderDrawListsFn and called by ImGui::Render(), but you can now call this directly from your main loop)
 void ImGui_ImplDX12_RenderDrawData(ImDrawData* draw_data, ID3D12GraphicsCommandList* ctx)
 {
     // Avoid rendering when minimized
@@ -627,7 +626,7 @@ void    ImGui_ImplDX12_InvalidateDeviceObjects()
 bool ImGui_ImplDX12_Init(ID3D12Device* device, int num_frames_in_flight, DXGI_FORMAT rtv_format, ID3D12DescriptorHeap* cbv_srv_heap,
                          D3D12_CPU_DESCRIPTOR_HANDLE font_srv_cpu_desc_handle, D3D12_GPU_DESCRIPTOR_HANDLE font_srv_gpu_desc_handle)
 {
-    // Setup back-end capabilities flags
+    // Setup backend capabilities flags
     ImGuiIO& io = ImGui::GetIO();
     io.BackendRendererName = "imgui_impl_dx12";
     io.BackendFlags |= ImGuiBackendFlags_RendererHasVtxOffset;  // We can honor the ImDrawCmd::VtxOffset field, allowing for large meshes.
