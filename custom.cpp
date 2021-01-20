@@ -84,7 +84,7 @@
 #pragma GCC diagnostic ignored "-Wclass-memaccess"          // [__GNUC__ >= 8] warning: 'memset/memcpy' clearing/writing an object of type 'xxxx' with no trivial copy-assignment; use assignment or value-initialization instead
 #endif
 
-bool ImGui::BufferingBar(const char* label, float value,  const ImVec2& size_arg, const ImU32& bg_col, const ImU32& fg_col) {
+bool ImGui::BufferingBar (const char* label, float value,  const ImVec2& size_arg, const ImU32& bg_col, const ImU32& fg_col) {
     ImGuiWindow* window = GetCurrentWindow();
     if (window->SkipItems)
         return false;
@@ -162,16 +162,14 @@ bool ImGui::Spinner(const char* label, float radius, int thickness, const ImU32&
     window->DrawList->PathStroke(color, false, thickness);
 }
 
-void ToggleButton(const char* str_id, bool* v, ImVec2* ight)
+void ToggleButton(const char* str_id, bool* v, const ImVec2& size, const ImU32& col_bg, const ImU32& fg_col)
 {
     ImVec2 p = ImGui::GetCursorScreenPos();
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
-    float height = ImGui::GetFrameHeight();
-    float width = height * 1.55f;
-    float radius = height * 0.50f;
+    float radius = size[1] * 0.50f;
 
-    ImGui::InvisibleButton(str_id, ImVec2(width, height));
+    ImGui::InvisibleButton(str_id, ImVec2(size));
     if (ImGui::IsItemClicked())
         *v = !*v;
 
@@ -184,12 +182,6 @@ void ToggleButton(const char* str_id, bool* v, ImVec2* ight)
         float t_anim = ImSaturate(g.LastActiveIdTimer / ANIM_SPEED);
         t = *v ? (t_anim) : (1.0f - t_anim);
     }
-
-    ImU32 col_bg;
-    if (ImGui::IsItemHovered())
-        col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.78f, 0.78f, 0.78f, 1.0f), ImVec4(0.64f, 0.83f, 0.34f, 1.0f), t));
-    else
-        col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.85f, 0.85f, 0.85f, 1.0f), ImVec4(0.56f, 0.83f, 0.26f, 1.0f), t));
 
     draw_list->AddRectFilled(p, ImVec2(p.x + width, p.y + height), col_bg, height * 0.5f);
     draw_list->AddCircleFilled(ImVec2(p.x + radius + t * (width - radius * 2.0f), p.y + radius), radius - 1.5f, IM_COL32(255, 255, 255, 255));

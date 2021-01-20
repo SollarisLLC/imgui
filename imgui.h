@@ -251,8 +251,8 @@ struct ImVec4
 namespace ImGui
 {
     //custom.cpp
-    IMGUI_API bool          BufferingBar(const char* label, float value,  const ImVec2& size_arg, const ImU32& bg_col, const ImU32& fg_col);
-    IMGUI_API bool          Spinner(const char* label, float radius, int thickness, const ImU32& color);
+    IMGUI_API bool          BufferingBar(const char* label, float value,  const ImVec2& size_arg);
+    IMGUI_API bool          Spinner(const char* label, float radius, int thickness);
     
     // Context creation and access
     // Each context create its own ImFontAtlas by default. You may instance one yourself and pass it to CreateContext() to share a font atlas between imgui contexts.
