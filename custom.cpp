@@ -162,25 +162,25 @@ bool ImGui::Spinner(const char* label, float radius, int thickness, const ImU32&
     window->DrawList->PathStroke(color, false, thickness);
 }
 
-void ToggleButton(const char* label, bool* boolean, const ImVec2& size, const ImU32& col_bg, const ImU32& fg_col)
+void ToggleButton(const char* label, bool* value, const ImVec2& size, const ImU32& col_bg, const ImU32& fg_col)
 {
     ImVec2 p = ImGui::GetCursorScreenPos();
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
     float radius = size.x * 0.50f;
 
-    ImGui::InvisibleButton(str_id, ImVec2(size));
+    ImGui::InvisibleButton(label, ImVec2(size));
     if (ImGui::IsItemClicked())
-        *v = !*v;
+        *value = !*value;
 
-    float t = *v ? 1.0f : 0.0f;
+    float t = *value ? 1.0f : 0.0f;
 
     ImGuiContext& g = *GImGui;
     float ANIM_SPEED = 0.08f;
-    if (g.LastActiveId == g.CurrentWindow->GetID(str_id))// && g.LastActiveIdTimer < ANIM_SPEED)
+    if (g.LastActiveId == g.CurrentWindow->GetID(value))// && g.LastActiveIdTimer < ANIM_SPEED)
     {
         float t_anim = ImSaturate(g.LastActiveIdTimer / ANIM_SPEED);
-        t = *v ? (t_anim) : (1.0f - t_anim);
+        t = *value ? (t_anim) : (1.0f - t_anim);
     }
 
     draw_list->AddRectFilled(p, ImVec2(p.x + size.x, p.y + size.y), col_bg, size.y * 0.5f);
