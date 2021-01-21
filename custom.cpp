@@ -167,7 +167,7 @@ void ToggleButton(const char* str_id, bool* v, const ImVec2& size, const ImU32& 
     ImVec2 p = ImGui::GetCursorScreenPos();
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
-    float radius = size[1] * 0.50f;
+    float radius = size.x * 0.50f;
 
     ImGui::InvisibleButton(str_id, ImVec2(size));
     if (ImGui::IsItemClicked())
@@ -183,6 +183,6 @@ void ToggleButton(const char* str_id, bool* v, const ImVec2& size, const ImU32& 
         t = *v ? (t_anim) : (1.0f - t_anim);
     }
 
-    draw_list->AddRectFilled(p, ImVec2(p.x + width, p.y + height), col_bg, height * 0.5f);
-    draw_list->AddCircleFilled(ImVec2(p.x + radius + t * (width - radius * 2.0f), p.y + radius), radius - 1.5f, IM_COL32(255, 255, 255, 255));
+    draw_list->AddRectFilled(p, ImVec2(p.x + size.x, p.y + size.y), col_bg, size.y * 0.5f);
+    draw_list->AddCircleFilled(ImVec2(p.x + radius + t * (size.x - radius * 2.0f), p.y + radius), radius - 1.5f, fg_col);
 }
