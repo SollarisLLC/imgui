@@ -162,7 +162,7 @@ bool ImGui::Spinner(const char* label, float radius, int thickness, const ImU32&
     window->DrawList->PathStroke(color, false, thickness);
 }
 
-void ToggleButton(const char* str_id, bool* v, const ImVec2& size, const ImU32& col_bg, const ImU32& fg_col)
+void ToggleButton(const char* label, bool* boolean, const ImVec2& size, const ImU32& col_bg, const ImU32& fg_col)
 {
     ImVec2 p = ImGui::GetCursorScreenPos();
     ImDrawList* draw_list = ImGui::GetWindowDrawList();

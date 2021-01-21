@@ -251,6 +251,7 @@ struct ImVec4
 namespace ImGui
 {
     //custom.cpp
+    IMGUI_API void          ToggleButton(const char* label, bool* boolean, const ImVec2& size, const ImU32& col_bg, const ImU32& fg_col);
     IMGUI_API bool          BufferingBar(const char* label, float value,  const ImVec2& size_arg);
     IMGUI_API bool          Spinner(const char* label, float radius, int thickness);
     
