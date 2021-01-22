@@ -101,7 +101,6 @@ bool ImGui::BufferingBar (const char* label, float value,  const ImVec2& size_ar
     if (!ItemAdd(bb, id))
         return false;
     
-    // Render
     const float circleStart = size.x * 0.7f;
     const float circleEnd = size.x;
     const float circleWidth = circleEnd - circleStart;
@@ -143,7 +142,7 @@ bool ImGui::Spinner(const char* label, float radius, int thickness, const ImU32&
     if (!ItemAdd(bb, id))
         return false;
         
-        // Render
+        
     window->DrawList->PathClear();
         
     int num_segments = 30;
@@ -185,4 +184,11 @@ void ToggleButton(const char* label, bool* value, const ImVec2& size, const ImU3
 
     draw_list->AddRectFilled(p, ImVec2(p.x + size.x, p.y + size.y), col_bg, size.y * 0.5f);
     draw_list->AddCircleFilled(ImVec2(p.x + radius + t * (size.x - radius * 2.0f), p.y + radius), radius - 1.5f, fg_col);
+}
+
+void ToggleButtonText(const char* text, const char* label, bool* value, const ImVec2& size, const ImU32& col_bg, const ImU32& fg_col)
+{
+    ImGui::Text(text);
+    ImGui::SameLine();
+    ImGui::ToggleButton(text, value, size, col_bg, fg_col);
 }
